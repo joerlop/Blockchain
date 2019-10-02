@@ -146,8 +146,10 @@ node_identifier = str(uuid4()).replace("-", "")
 blockchain = Blockchain()
 
 
-@app.route("/mine/<proof>", methods=["GET"])
-def mine(proof):
+@app.route("/mine", methods=["POST"])
+def mine():
+
+    proof = request.get_json()["proof"]
 
     prev_block = blockchain.last_block
 
@@ -180,7 +182,7 @@ def mine(proof):
 
 @app.route("/last_block", methods=["GET"])
 def last_block():
-    return blockchain.last_block
+    return jsonify(blockchain.last_block), 200
 
 
 @app.route("/transactions/new", methods=["POST"])
