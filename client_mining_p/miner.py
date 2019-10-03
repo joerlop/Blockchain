@@ -4,10 +4,10 @@ import requests
 import sys
 
 
-# TODO: Implement functionality to search for a proof 
+# TODO: Implement functionality to search for a proof
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # What node are we interacting with?
     if len(sys.argv) > 1:
         node = sys.argv[1]
@@ -15,9 +15,12 @@ if __name__ == '__main__':
         node = "http://localhost:5000"
 
     coins_mined = 0
+    proof = 0
     # Run forever until interrupted
     while True:
         # TODO: Get the last proof from the server and look for a new one
+        last_block = requests.get("http://localhost:5000/last_block").json()
+        print(last_block)
         # TODO: When found, POST it to the server {"proof": new_proof}
         # TODO: We're going to have to research how to do a POST in Python
         # HINT: Research `requests` and remember we're sending our data as JSON
